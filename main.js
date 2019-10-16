@@ -25,8 +25,20 @@ var cardsArray = [
 // give section element a class of grid
     grid.setAttribute('class', 'grid');
 // append the grid section to the game board div
-    game.appendChild(grid)
-
+    game.appendChild(grid);
+// to display images use a for loop to go through each item of array
+    for(i = 0; i < cardsArray.length; i++){
+    //create a div element and assign it to variable card
+    const card = document.createElement('div')
+    //apply a card class to that div
+    card.classList.add('card');
+    // set the data-name attribute of the div to the cardsArray name
+    card.dataset.name = cardsArray[i].name;
+    //apply the background image of the div to the cardsArray image
+    card.style.backgroundImage = `url(${cardsArray[i].img})`;
+    //append div to the grid section
+    grid.appendChild(card);
+    }
   var cardsArray = [
     {    'name': 'CSS',    'img': 'https://github.com/robgmerrill/img/blob/master/css3-logo.png?raw=true',  },
     {    'name': 'HTML',    'img': 'https://github.com/robgmerrill/img/blob/master/html5-logo.png?raw=true',  },
