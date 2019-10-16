@@ -21,6 +21,10 @@ var cardsArray = [
 // need to duplicate cardsArray to create a match
 // the concat here works by taking the cardsArray and adding what we want to it. in this case cardsArray again
     const gameGrid = cardsArray.concat(cardsArray)
+// need to add randomisation for the game
+gameGrid.sort(function(){
+    return 0.5 - Math.random()
+})
 
 // targets the div with the id of game-board and assign to a variable game
     const game = document.getElementById('game-board');
