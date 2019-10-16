@@ -1,7 +1,7 @@
 // card array filled with 12 objects each with two properties. Name set to a string and an img set to a url of the image
 //to access the array we'd name the array, chose the location and use dot notation to chose which property you want
-//eg. cardsArray[0].name will return css
-//     cardsArray[5].img will return the image for photoshop
+//eg. cardsArray[0].name; will return css
+//     cardsArray[5].img; will return the image for photoshop
 
 var cardsArray = [
     {    'name': 'CSS',    'img': 'https://github.com/robgmerrill/img/blob/master/css3-logo.png?raw=true',  },
@@ -17,6 +17,15 @@ var cardsArray = [
     {    'name': 'Sublime',    'img': 'https://github.com/robgmerrill/img/blob/master/sublime-logo.png?raw=true',  },
     {    'name': 'Wordpress',    'img': 'https://github.com/robgmerrill/img/blob/master/wordpress-logo.png?raw=true',  },
   ];
+
+// targets the div with the id of game-board and assign to a variable game
+    const game = document.getElementById('game-board');
+// create a section element and assign to grid variable
+    const grid = document.createElement('section')
+// give section element a class of grid
+    grid.setAttribute('class', 'grid');
+// append the grid section to the game board div
+    game.appendChild(grid)
 
   var cardsArray = [
     {    'name': 'CSS',    'img': 'https://github.com/robgmerrill/img/blob/master/css3-logo.png?raw=true',  },
