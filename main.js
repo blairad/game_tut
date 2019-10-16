@@ -23,7 +23,7 @@ var cardsArray = [
     const gameGrid = cardsArray.concat(cardsArray)
 // need to add randomisation for the game
 gameGrid.sort(function(){
-    return 0.5 - Math.random()
+    return 0.5 - Math.random();
 })
 
 // targets the div with the id of game-board and assign to a variable game
@@ -47,4 +47,11 @@ gameGrid.sort(function(){
     //append div to the grid section
     grid.appendChild(card);
     }
+// adding event listener to grid
+    grid.addEventListener('click', function(event){
+    // declare variable to target clicked item
+    const clicked = event.target;
+    // add selected class
+    clicked.classList.add('selected')
+    })
 
