@@ -31,24 +31,35 @@ var cardsArray = [
 // create a section element and assign to grid variable
     const grid = document.createElement('section')
 // give section element a class of grid
-    grid.setAttribute('class', 'grid');
+        grid.setAttribute('class', 'grid');
 // append the grid section to the game board div
-    game.appendChild(grid);
+        game.appendChild(grid);
 // to display images use a for loop to go through each item of array
     for(i = 0; i < gameGrid.length; i++){
     //create a div element and assign it to variable card
-    const card = document.createElement('div')
+        const card = document.createElement('div')
     //apply a card class to that div
-    card.classList.add('card');
+        card.classList.add('card');
     // set the data-name attribute of the div to the cardsArray name
-    card.dataset.name = gameGrid[i].name;
+        card.dataset.name = gameGrid[i].name;
     //apply the background image of the div to the cardsArray image(object)
-    card.style.backgroundImage = `url(${gameGrid[i].img})`;
+        card.style.backgroundImage = `url(${gameGrid[i].img})`;
     //append div to the grid section
-    grid.appendChild(card);
+        grid.appendChild(card);
     }
 
+    let firstGuess = '';
+    let secondGuess = '';
     let count = 0;
+    let previousTarget = null;
+// 
+    const match = function(){
+        let selected = document.querySelectorAll('.selected')
+// seleved is an array like object containing `seleced` class   
+        for (i = 0; i < selected.length; i++){
+            selected[i].classList.add('match');
+        }
+    };
 
 // adding event listener to grid
     grid.addEventListener('click', function(event){
@@ -56,15 +67,35 @@ var cardsArray = [
     const clicked = event.target;
 //don't allow grid section to be selected only divs inside grid
 // Re - SECTION being capitalised  This is just specific to the API. nodeName will be looking for a tag in all caps. I’m not sure the origins of this decision as it is a bit counter intuitive as our section tag in the HTML isn’t in caps. Just one of those things we have to work with :)
-    if(clicked.nodeName === 'SECTION'){
+    if (clicked.nodeName === 'SECTION' || clicked === previousTarget || clicked.parentNode.classList.contains('match') || clicked.parentNode.classList.contains('selected')) {
         return;
     }
 // we only want to add to the seleceted class if current count is less that two
     if (count < 2){
         count++;
-// add selected class
-        clicked.classList.add('selected');
+        
+        if (count === 1){
+            // assign first guess
+            firstGuess = clicked.dataset.name;
+            clicked.classList.add('selected');
+        } else {
+        //assign second guess
+            secondGuess = clicked.dataset.name;
+            clicked.classList.add('selected');
+        }
+    // if both guesses are not empty
+    if (firstGuess !== '' && secondGuess !== ''){
+        if (firstGuess === secondGuess){
+            match();
+        }
+    }
+    previousTarget = clicked;
     }
     });
 
 
+    
+
+
+// // add selected class
+// clicked.classList.add('selected');
