@@ -22,8 +22,8 @@ var cardsArray = [
 // the concat here works by taking the cardsArray and adding what we want to it. in this case cardsArray again
     const gameGrid = cardsArray.concat(cardsArray)
 // need to add randomisation for the game
-gameGrid.sort(function(){
-    return 0.5 - Math.random();
+    gameGrid.sort(function(){
+        return 0.5 - Math.random();
 })
 
 // targets the div with the id of game-board and assign to a variable game
@@ -47,11 +47,24 @@ gameGrid.sort(function(){
     //append div to the grid section
     grid.appendChild(card);
     }
+
+    let count = 0;
+
 // adding event listener to grid
     grid.addEventListener('click', function(event){
     // declare variable to target clicked item
     const clicked = event.target;
-    // add selected class
-    clicked.classList.add('selected')
-    })
+//don't allow grid section to be selected only divs inside grid
+// Re - SECTION being capitalised  This is just specific to the API. nodeName will be looking for a tag in all caps. I’m not sure the origins of this decision as it is a bit counter intuitive as our section tag in the HTML isn’t in caps. Just one of those things we have to work with :)
+    if(clicked.nodeName === 'SECTION'){
+        return;
+    }
+// we only want to add to the seleceted class if current count is less that two
+    if (count < 2){
+        count++;
+// add selected class
+        clicked.classList.add('selected');
+    }
+    });
+
 
