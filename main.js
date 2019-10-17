@@ -36,24 +36,33 @@ var cardsArray = [
         game.appendChild(grid);
 // to display images use a for loop to go through each item of array
     for(i = 0; i < gameGrid.length; i++){
-    //create a div element and assign it to variable card
+//create a div element and assign it to variable card
         const card = document.createElement('div')
-    //apply a card class to that div
+//apply a card class to that div
         card.classList.add('card');
-    // set the data-name attribute of the div to the cardsArray name
+// set the data-name attribute of the div to the cardsArray name
         card.dataset.name = gameGrid[i].name;
-    //apply the background image of the div to the cardsArray image(object)
-        card.style.backgroundImage = `url(${gameGrid[i].img})`;
-    //append div to the grid section
-        grid.appendChild(card);
+// create front of card
+    const front = document.createElement('div');
+    front.classList.add('front')
+// create back of card
+    const back = document.createElement('div');
+    back.classList.add('back')
+    back.style.backgroundImage = `url(${gameGrid[i].img})`
+// append to grid
+    grid.appendChild(card);
+    card.appendChild(front);
+    card.appendChild(back);
+
     }
 
     let firstGuess = '';
     let secondGuess = '';
     let count = 0;
     let previousTarget = null;
-    const delay = 1200;
-// 
+    let delay = 1200;
+
+    // add match css
     const match = function(){
         let selected = document.querySelectorAll('.selected')
 // seleved is an array like object containing `seleced` class   
@@ -90,23 +99,23 @@ var cardsArray = [
     if (count < 2){
         count++;
         
-        if (count === 1){
-            // assign first guess
-            firstGuess = clicked.dataset.name;
-            clicked.classList.add('selected');
-        } else {
-        //assign second guess
-            secondGuess = clicked.dataset.name;
-            clicked.classList.add('selected');
-        }
+        if (count === 1) {
+            // Assign first guess
+            firstGuess = clicked.parentNode.dataset.name;
+            clicked.parentNode.classList.add('selected');
+          } else {
+            // Assign second guess
+            secondGuess = clicked.parentNode.dataset.name;
+            clicked.parentNode.classList.add('selected');
+          }
     // if both guesses are not empty
     if (firstGuess !== '' && secondGuess !== ''){
         if (firstGuess === secondGuess){
-            // run the match or resetGuesses functoin from above
-            setTimeout(match);
-            setTimeout(resetGuesses);
+// run the match or resetGuesses from above as callback functions.
+            setTimeout(match, delay);
+            setTimeout(resetGuesses, delay);
         }else {
-            setTimeout(resetGuesses);
+            setTimeout(resetGuesses, delay);
         } 
     }
     previousTarget = clicked;

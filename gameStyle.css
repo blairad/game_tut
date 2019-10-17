@@ -18,18 +18,42 @@ body {
 }
 
 .card {
+  position: relative;
+  transition: all .4s linear;
+  transform-style: preserve-3d;
   margin: 5px;
+}
+
+.card,
+.back,
+.front {
+  height: 150px;
+  width: 150px;
+}
+
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  background: #FAB942 url('../img/question.gif') no-repeat center center / contain;
+}
+
+.back {
+  transform: rotateY(180deg);
   background-color: #6589F9;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 150px;
-  width: 150px;
 }
-.selected{
-    border: 4px solid blue;
+
+.selected {
+  transform: rotateY(180deg);
 }
-.match{
-    border: 4px solid red;
-    background-image: none !important;
+
+.match .front {
+  background: #6589F9 !important;
 }
