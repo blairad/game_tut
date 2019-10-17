@@ -52,6 +52,7 @@ var cardsArray = [
     let secondGuess = '';
     let count = 0;
     let previousTarget = null;
+    const delay = 1200;
 // 
     const match = function(){
         let selected = document.querySelectorAll('.selected')
@@ -60,6 +61,21 @@ var cardsArray = [
             selected[i].classList.add('match');
         }
     };
+
+// reset guesses after two attempts
+
+    const resetGuesses = function(){
+        firstGuess = '';
+        secondGuess = '';
+        count = 0;
+        previousTarget = null;
+    
+    const selected = document.querySelectorAll('.selected');
+    for (i = 0; i < selected.length; i++){
+        selected[i].classList.remove('selected');
+
+    } 
+    }
 
 // adding event listener to grid
     grid.addEventListener('click', function(event){
@@ -86,8 +102,12 @@ var cardsArray = [
     // if both guesses are not empty
     if (firstGuess !== '' && secondGuess !== ''){
         if (firstGuess === secondGuess){
-            match();
-        }
+            // run the match or resetGuesses functoin from above
+            setTimeout(match);
+            setTimeout(resetGuesses);
+        }else {
+            setTimeout(resetGuesses);
+        } 
     }
     previousTarget = clicked;
     }
